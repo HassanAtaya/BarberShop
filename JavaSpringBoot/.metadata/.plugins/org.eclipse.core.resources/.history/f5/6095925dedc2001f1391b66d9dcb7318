@@ -1,0 +1,5 @@
+CREATE TABLE user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_general_ci,
+    password VARCHAR(255) NOT NULL CHARACTER SET utf8 COLLATE utf8_general_ci
+) CHARACTER SET utf8 COLLATE utf8_general_ci;
