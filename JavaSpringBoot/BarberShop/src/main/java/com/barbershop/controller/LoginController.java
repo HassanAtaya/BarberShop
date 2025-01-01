@@ -12,7 +12,7 @@ public class LoginController {
     private UserRepository userRepository;
 
     @PostMapping("/login")
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = {"http://localhost:4200", "https://52.58.132.247:4200"}) 
     public String login(@RequestBody User user) {
     	try {
     		User existingUser = userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword());
