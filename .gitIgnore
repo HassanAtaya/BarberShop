@@ -11,7 +11,7 @@ node_modules/
 ## Angular build outputs ##
 # out-tsc/
 # build/
-# .angular/
+.angular/
 
 ## Angular environment files ##
 # src/environments/environment*.ts
