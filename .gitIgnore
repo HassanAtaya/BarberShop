@@ -1,1 +1,4 @@
-
+.log
+JavaSpringBoot/.metadata/*
+*.log
+*.ini
