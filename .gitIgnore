@@ -1,4 +1,8 @@
-.log
-JavaSpringBoot/.metadata/*
+# Ignore all log files
 *.log
+
+# Ignore .ini files
 *.ini
+
+# Ignore metadata folder and its contents
+JavaSpringBoot/.metadata/
