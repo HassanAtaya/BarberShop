@@ -29,7 +29,12 @@ export class LoginComponent implements OnInit {
           console.log('Login successful', response);
         },
         (error) => {
-          console.error('Login failed', error);
+          if(error?.error?.text) {
+            console.log('Login failed', error?.error?.text);
+          }
+          else {
+            console.error('Login failed', error);
+          }
         }
       );
     }

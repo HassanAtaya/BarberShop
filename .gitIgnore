@@ -1,52 +1,52 @@
 ## Logs ##
-# *.log
-# npm-debug.log*
-# yarn-debug.log*
-# yarn-error.log*
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 ## Dependency directories ##
 node_modules/
-# bower_components/
+bower_components/
 
 ## Angular build outputs ##
-# out-tsc/
-# build/
+out-tsc/
+build/
 .angular/
 
 ## Angular environment files ##
-# src/environments/environment*.ts
+src/environments/environment*.ts
 
 ## IDE and Editor specific ##
-# .idea/
-# .vscode/
-# *.suo
-# *.ntvs*
-# *.njsproj
-# *.sln
-# *.sw?
-# *.iml
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.iml
 
 ## Compiled files ##
-# *.class
-# *.jar
-# *.war
-# *.ear
+*.class
+*.jar
+*.war
+*.ear
 
 ## Spring Boot build directories ##
-# target/
-# build/
+target/
+build/
 
 ## Maven specific ##
-# .mvn/
-# pom.xml.tag
-# pom.xml.releaseBackup
-# pom.xml.versionsBackup
-# pom.xml.next
-# release.properties
+.mvn/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
 
 ## Gradle specific ##
-# .gradle/
-# build/
+.gradle/
+build/
 
 ## Eclipse specific ##
 .classpath
@@ -55,58 +55,58 @@ node_modules/
 .metadata/
 
 ## IntelliJ IDEA specific ##
-# .idea/
-# *.ipr
-# *.iws
-# *.iml
+.idea/
+*.ipr
+*.iws
+*.iml
 
 ## Operating system files ##
-# .DS_Store
-# Thumbs.db
+.DS_Store
+Thumbs.db
 
 ## Temporary files ##
-# *.tmp
-# *.bak
-# *.swp
-# *.lock
+*.tmp
+*.bak
+*.swp
+*.lock
 
 ## Application-specific ##
-# *.env
-# *.ini
-# #*.properties
-# *.key
-# *.pem
+*.env
+*.ini
+#*.properties
+*.key
+*.pem
 
 ## Generated coverage reports ##
-# coverage/
-# test-results/
+coverage/
+test-results/
 
 ## Local tooling and logs ##
 package-lock.json
 *.pack
-# yarn.lock
-# npm-shrinkwrap.json
-# .eslintcache
-# *.cache
-# .editorconfig
+yarn.lock
+npm-shrinkwrap.json
+.eslintcache
+*.cache
+.editorconfig
 
 ## Spring Boot specific ##
-# hs_err_pid*.log
-# *.pid
-# actuator.log
+hs_err_pid*.log
+*.pid
+actuator.log
 
 ## Ignore sensitive files ##
-# *.crt
-# *.cert
-# *.key
-# *.pfx
+*.crt
+*.cert
+*.key
+*.pfx
 
 ## Generated application metadata ##
-# .angular/
-# .sass-cache/
-# *.log
+.angular/
+.sass-cache/
+*.log
 
 ## Ignore built Angular files that shouldn't be tracked ##
-# *.js.map
-# *.css.map
-# *.d.ts
+*.js.map
+*.css.map
+*.d.ts
