@@ -1,33 +1,18 @@
 package com.barbershop.controller;
 
+import com.barbershop.dto.UserDTO;
+import com.barbershop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.barbershop.entity.User;
-import com.barbershop.repository.UserRepository;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/login")
 public class LoginController {
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
-    @PostMapping("/login")
-    @CrossOrigin(origins = {"http://localhost:4200", "https://52.58.132.247:4200"}) 
-    public String login(@RequestBody User user) {
-    	try {
-    		User existingUser = userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword());
-            if (existingUser != null) {
-                return "Hi " + existingUser.getUserName();
-            }
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-        
-        return "Invalid username or password";
+    @PostMapping
+    public UserDTO login(@RequestBody UserDTO userDTO) {
+        return userService.login(userDTO);
     }
 }

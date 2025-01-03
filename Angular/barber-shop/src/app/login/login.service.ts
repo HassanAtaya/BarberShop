@@ -1,20 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { allSRVService } from '../all-srvc.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class LoginService {
 
-    private loginUrl = 'http://localhost:8080/api/login';
-    // private loginUrl = 'https://52.58.132.247:8080/api/login';
+    private url = "login";
 
-    constructor(private http: HttpClient) { }
+    constructor(
+        private http: HttpClient,
+        private allSRVService: allSRVService
+    ) { }
 
     login(userName: string, password: string): Observable<any> {
-        const headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this.http.post(this.loginUrl, { userName, password }, { headers });
-    }
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        });
 
+        return this.http.post<any>(this.allSRVService.url + this.url, 
+            { userName, password },
+            { headers }
+        );
+    }
 }

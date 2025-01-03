@@ -1,0 +1,19 @@
+<div class="roles-container">
+    <h2>Roles</h2>
+    <ul>
+      <li *ngFor="let role of roles">
+        {{ role.name }}
+        <button (click)="deleteRole(role.id)">Delete</button>
+      </li>
+    </ul>
+  
+    <!-- Role creation form -->
+    <form (ngSubmit)="createRole(roleForm)">
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" [(ngModel)]="roleForm.name" name="name" required>
+      </div>
+      <button type="submit" [disabled]="!roleForm.name">Create Role</button>
+    </form>
+  </div>
+  

@@ -1,0 +1,26 @@
+<div class="services-container">
+  <h2>Services</h2>
+  <ul>
+    <li *ngFor="let service of services">
+      {{ service.name }} - {{ service.price }} - {{ service.durationMinutes }} minutes
+      <button (click)="deleteService(service.id)">Delete</button>
+    </li>
+  </ul>
+
+  <!-- Service creation form -->
+  <form (ngSubmit)="createService(serviceForm)">
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" [(ngModel)]="serviceForm.name" name="name" required>
+    </div>
+    <div>
+      <label for="price">Price:</label>
+      <input type="number" id="price" [(ngModel)]="serviceForm.price" name="price" required>
+    </div>
+    <div>
+      <label for="durationMinutes">Duration (minutes):</label>
+      <input type="number" id="durationMinutes" [(ngModel)]="serviceForm.durationMinutes" name="durationMinutes" required>
+    </div>
+    <button type="submit" [disabled]="!serviceForm.name || !serviceForm.price || !serviceForm.durationMinutes">Create Service</button>
+  </form>
+</div>

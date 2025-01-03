@@ -84,6 +84,7 @@ test-results/
 ## Local tooling and logs ##
 package-lock.json
 *.pack
+/Angular/barber-shop/.angular/cache/**/*.pack
 yarn.lock
 npm-shrinkwrap.json
 .eslintcache

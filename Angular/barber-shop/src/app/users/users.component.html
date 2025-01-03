@@ -1,0 +1,26 @@
+<div class="users-container">
+  <h2>Users</h2>
+  <ul>
+    <li *ngFor="let user of users">
+      {{ user.userName }} - {{ user.role.name }}
+      <button (click)="deleteUser(user.id)">Delete</button>
+    </li>
+  </ul>
+  <form (ngSubmit)="createUser(userForm)">
+    <div>
+      <label for="userName">Username:</label>
+      <input type="text" id="userName" [(ngModel)]="userForm.userName" name="userName" required>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" [(ngModel)]="userForm.password" name="password" required>
+    </div>
+    <div>
+      <label for="role">Role:</label>
+      <select id="role" [(ngModel)]="userForm.role.id" name="role" required>
+        <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
+      </select>
+    </div>
+    <button type="submit">Create User</button>
+  </form>
+</div>

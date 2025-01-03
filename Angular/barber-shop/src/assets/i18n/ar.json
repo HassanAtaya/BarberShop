@@ -1,0 +1,12 @@
+{
+    "login": "تسجيل الدخول",
+    "logout": "تسجيل الخروج",
+    "profile": "الملف الشخصي",
+    "change_password": "تغيير كلمة المرور",
+    "services": "الخدمات",
+    "users": "المستخدمين",
+    "roles": "الأدوار",
+    "appointments": "المواعيد",
+    "currencies": "العملات",
+    "calendar": "التقويم"
+}

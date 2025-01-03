@@ -1,27 +1,34 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { LoginService } from './login/login.service';
-import { HttpClientModule } from '@angular/common/http'; // Correct import
+import { ServicesComponent } from './services/services.component';
+import { UsersComponent } from './users/users.component';
+import { RolesComponent } from './roles/roles.component';
+import { AppointmentsComponent } from './appointments/appointments.component';
+import { CurrenciesComponent } from './currencies/currencies.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    ServicesComponent,
+    UsersComponent,
+    RolesComponent,
+    AppointmentsComponent,
+    CurrenciesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule // Use HttpClientModule here
+    HttpClientModule
   ],
-  providers: [
-    LoginService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
