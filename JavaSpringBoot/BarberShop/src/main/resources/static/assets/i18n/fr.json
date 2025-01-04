@@ -1,0 +1,12 @@
+{
+    "login": "Se Connecter",
+    "logout": "Se Déconnecter",
+    "profile": "Profil",
+    "change_password": "Changer le Mot de Passe",
+    "services": "Services",
+    "users": "Utilisateurs",
+    "roles": "Rôles",
+    "appointments": "Rendez-vous",
+    "currencies": "Devises",
+    "calendar": "Calendrier"
+}

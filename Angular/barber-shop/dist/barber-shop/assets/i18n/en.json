@@ -1,0 +1,12 @@
+{
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "Profile",
+    "change_password": "Change Password",
+    "services": "Services",
+    "users": "Users",
+    "roles": "Roles",
+    "appointments": "Appointments",
+    "currencies": "Currencies",
+    "calendar": "Calendar"
+}

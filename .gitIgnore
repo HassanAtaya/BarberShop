@@ -85,6 +85,8 @@ test-results/
 package-lock.json
 *.pack
 /Angular/barber-shop/.angular/cache/**/*.pack
+*.pack.old
+/Angular/barber-shop/.angular/cache/**/*.pack.old
 yarn.lock
 npm-shrinkwrap.json
 .eslintcache

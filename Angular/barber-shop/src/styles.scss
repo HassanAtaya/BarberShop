@@ -1,3 +1,5 @@
+@import 'node_modules/ngx-toastr/toastr.css';
+
 /* Global Styles */
 body {
     font-family: Arial, sans-serif;
@@ -71,3 +73,7 @@ form select {
         padding: 8px;
     }
 }
+
+.toast-container .toast-progress {
+    background-color: #007bff !important; /* Light blue color */
+  }
