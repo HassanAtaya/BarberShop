@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.barbershop.dto.UserDTO;
@@ -15,9 +14,6 @@ import com.barbershop.repository.UserRepository;
 public class UserService {
 	@Autowired
 	private UserRepository userRepository;
-
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder; // For password hashing
 
 	public List<UserDTO> getAllUsers() {
 		return userRepository.findAll().stream().map(UserDTO::new).collect(Collectors.toList());
@@ -31,8 +27,7 @@ public class UserService {
 	public UserDTO createUser(UserDTO userDTO) {
 		User user = new User();
 		user.setUserName(userDTO.getUserName());
-		user.setPassword(passwordEncoder.encode(userDTO.getPassword())); // Hash the password
-		// Set other fields if needed
+		user.setPassword(userDTO.getPassword());
 		return new UserDTO(userRepository.save(user));
 	}
 
@@ -42,9 +37,11 @@ public class UserService {
 
 	public UserDTO login(UserDTO userDTO) {
 		User user = userRepository.findByUserName(userDTO.getUserName());
-		if (user != null && passwordEncoder.matches(userDTO.getPassword(), user.getPassword())) {
+
+		if (user != null && user.getPassword().toString().equals(userDTO.getPassword())) {
 			return new UserDTO(user);
 		}
+
 		return null;
 	}
 }

@@ -1,3 +1,4 @@
+<!-- login.component.html -->
 <div class="login-container">
   <h2>Login</h2>
   <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" novalidate>
@@ -11,6 +12,7 @@
         name="userName"
         #userNameField="ngModel"
         required
+        #userNameInput
       >
       <div *ngIf="userNameField.invalid && userNameField.touched" style="color: red;">
         Username is required.
@@ -18,15 +20,21 @@
     </div>
     <div>
       <label for="password">Password:</label>
-      <input
-        style="width: 97%;"
-        type="password"
-        id="password"
-        [(ngModel)]="password"
-        name="password"
-        #passwordField="ngModel"
-        required
-      >
+      <div class="password-container">
+        <input
+          style="width: 90%;"
+          [type]="passwordVisible ? 'text' : 'password'"
+          id="password"
+          [(ngModel)]="password"
+          name="password"
+          #passwordField="ngModel"
+          required
+        >
+        <button type="button" (click)="togglePasswordVisibility()" class="eye-icon">
+          <span *ngIf="!passwordVisible">👁️</span>
+          <span *ngIf="passwordVisible">🙈</span>
+        </button>
+      </div>
       <div *ngIf="passwordField.invalid && passwordField.touched" style="color: red;">
         Password is required.
       </div>
