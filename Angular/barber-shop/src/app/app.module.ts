@@ -13,6 +13,7 @@ import { RolesComponent } from './roles/roles.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { CurrenciesComponent } from './currencies/currencies.component';
 import { ToastrModule } from 'ngx-toastr';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ToastrModule } from 'ngx-toastr';
     UsersComponent,
     RolesComponent,
     AppointmentsComponent,
-    CurrenciesComponent
+    CurrenciesComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

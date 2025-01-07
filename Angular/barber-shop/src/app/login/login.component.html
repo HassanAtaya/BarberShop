@@ -1,14 +1,36 @@
 <div class="login-container">
   <h2>Login</h2>
-  <form (ngSubmit)="login()">
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" novalidate>
     <div>
       <label for="userName">Username:</label>
-      <input style="width: 100%;" type="text" id="userName" [(ngModel)]="userName" name="userName" required>
+      <input
+        style="width: 97%;"
+        type="text"
+        id="userName"
+        [(ngModel)]="userName"
+        name="userName"
+        #userNameField="ngModel"
+        required
+      >
+      <div *ngIf="userNameField.invalid && userNameField.touched" style="color: red;">
+        Username is required.
+      </div>
     </div>
     <div>
       <label for="password">Password:</label>
-      <input style="width: 100%;" type="password" id="password" [(ngModel)]="password" name="password" required>
+      <input
+        style="width: 97%;"
+        type="password"
+        id="password"
+        [(ngModel)]="password"
+        name="password"
+        #passwordField="ngModel"
+        required
+      >
+      <div *ngIf="passwordField.invalid && passwordField.touched" style="color: red;">
+        Password is required.
+      </div>
     </div>
-    <button type="submit">Login</button>
+    <button style="width: 102%;" type="submit">Login</button>
   </form>
 </div>

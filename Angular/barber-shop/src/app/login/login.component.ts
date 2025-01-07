@@ -17,14 +17,19 @@ export class LoginComponent {
     private toastrService: ToastrService
   ) { }
 
-  login() {
+  login(loginForm: any) {
+    if (loginForm && (!this.userName || !this.password)) {
+      loginForm.controls['userName']?.markAsTouched();
+      loginForm.controls['password']?.markAsTouched();
+      return;
+    }
+
     this.loginService.login(this.userName, this.password).subscribe(
       response => {
-        if(response != null){
-          this.router.navigateByUrl('/users');
+        if (response != null) {
+          this.router.navigateByUrl('/home');
           this.toastrService.success("Logged In");
-        }
-        else {
+        } else {
           this.toastrService.error("Invalid Username or Password");
         }
       },
@@ -33,4 +38,5 @@ export class LoginComponent {
       }
     );
   }
+
 }
