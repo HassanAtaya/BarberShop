@@ -2,28 +2,34 @@ package com.barbershop.entity;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.*;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
 public class User {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(name = "user_name", nullable = false, length = 255)
 	private String userName;
+
+	@Column(name = "password", nullable = false, length = 255)
 	private String password;
 
-	@ManyToOne
-	@JoinColumn(name = "role_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "role_id", nullable = false)
 	private Role role;
 
-	@ManyToOne
-	@JoinColumn(name = "language_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "language_id", nullable = false)
 	private Language language;
 
 	@Column(name = "last_update")
@@ -32,6 +38,7 @@ public class User {
 	@Column(name = "last_updator")
 	private Long lastUpdator;
 
+	// Getters and Setters
 	public Long getId() {
 		return id;
 	}
@@ -72,14 +79,6 @@ public class User {
 		this.language = language;
 	}
 
-	public Long getLastUpdator() {
-		return lastUpdator;
-	}
-
-	public void setLastUpdator(Long lastUpdator) {
-		this.lastUpdator = lastUpdator;
-	}
-
 	public LocalDateTime getLastUpdate() {
 		return lastUpdate;
 	}
@@ -88,4 +87,11 @@ public class User {
 		this.lastUpdate = lastUpdate;
 	}
 
+	public Long getLastUpdator() {
+		return lastUpdator;
+	}
+
+	public void setLastUpdator(Long lastUpdator) {
+		this.lastUpdator = lastUpdator;
+	}
 }

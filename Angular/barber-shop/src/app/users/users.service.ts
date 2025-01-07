@@ -7,22 +7,37 @@ import { allSRVService } from '../all-srvc.service';
   providedIn: 'root'
 })
 export class UsersService {
-  private url = "users";
+  private apiUrl: any = null;
 
   constructor(
     private http: HttpClient,
     private allSRVService: allSRVService
-  ) { }
-
-  getAllUsers(): Observable<any> {
-    return this.http.get<any>(this.allSRVService.url + this.url);
+  ) {
+    this.apiUrl = this.allSRVService.url + "users";
   }
 
+  // Get all users
+  getUsers(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
+  }
+
+  // Create a user
   createUser(user: any): Observable<any> {
-    return this.http.post<any>(this.allSRVService.url + this.url, user);
+    return this.http.post<any>(this.apiUrl, user);
   }
 
+  // Update user (same API as create for simplicity, or you can use a separate PUT request)
+  updateUser(user: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${user.id}`, user);
+  }
+
+  // Delete user
   deleteUser(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.allSRVService.url + this.url}/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  }
+
+  // Get user by username (for login or validation)
+  getUserByUsername(userName: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${userName}`);
   }
 }

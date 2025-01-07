@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from './users.service';
-import { RolesService } from '../roles/roles.service';
 
 @Component({
   selector: 'app-users',
@@ -9,61 +8,74 @@ import { RolesService } from '../roles/roles.service';
 })
 export class UsersComponent implements OnInit {
   users: any[] = [];
-  userForm: any = { // Initialize userForm
-    userName: '',
-    password: '',
-    role: { id: null }
-  };
-  roles: any[] = []; // Assuming roles are fetched from an API
+  user: any = {};  // Empty user object for adding/editing
+  editingUserId: number | null = null;
+  showAddUserModal: boolean = false;
 
-  constructor(private usersService: UsersService, private rolesService: RolesService) { }
+  constructor(private userService: UsersService) { }
 
   ngOnInit(): void {
     this.loadUsers();
-    this.loadRoles(); // Load roles if needed for the dropdown
   }
 
-  loadUsers() {
-    this.usersService.getAllUsers().subscribe(
-      data => {
+  loadUsers(): void {
+    this.userService.getUsers().subscribe(
+      (data: any) => {
         this.users = data;
       },
-      error => {
+      (error: any) => {
         console.error('Error loading users', error);
       }
     );
   }
 
-  loadRoles() {
-    this.rolesService.getAllRoles().subscribe( // Ensure you have a service method for this
-      data => {
-        this.roles = data;
-      },
-      error => {
-        console.error('Error loading roles', error);
-      }
-    );
+  saveUser(): void {
+    if (this.editingUserId) {
+      this.userService.updateUser(this.user).subscribe(
+        () => {
+          this.loadUsers();  // Refresh the list of users after updating
+          this.resetForm();
+        },
+        (error: any) => {
+          console.error('Error updating user', error);
+        }
+      );
+    } else {
+      this.userService.createUser(this.user).subscribe(
+        () => {
+          this.loadUsers();  // Refresh the list of users after adding
+          this.resetForm();
+        },
+        (error: any) => {
+          console.error('Error creating user', error);
+        }
+      );
+    }
   }
 
-  createUser(user: any) {
-    this.usersService.createUser(user).subscribe(
-      response => {
-        this.loadUsers();
-      },
-      error => {
-        console.error('Error creating user', error);
-      }
-    );
+  editUser(user: any): void {
+    this.user = { ...user };  // Copy the user data to edit
+    this.editingUserId = user.id;
+    this.showAddUserModal = true;
   }
 
-  deleteUser(id: number) {
-    this.usersService.deleteUser(id).subscribe(
-      response => {
-        this.loadUsers();
-      },
-      error => {
-        console.error('Error deleting user', error);
-      }
-    );
+  deleteUser(id: number): void {
+    const confirmDelete = confirm('Are you sure you want to delete this user?');
+    if (confirmDelete) {
+      this.userService.deleteUser(id).subscribe(
+        () => {
+          this.loadUsers();  // Refresh the list after deletion
+        },
+        (error: any) => {
+          console.error('Error deleting user', error);
+        }
+      );
+    }
+  }
+
+  resetForm(): void {
+    this.user = {};  // Reset the user form
+    this.editingUserId = null;
+    this.showAddUserModal = false;
   }
 }

@@ -1,45 +1,50 @@
 package com.barbershop.service;
 
-import com.barbershop.dto.UserDTO;
-import com.barbershop.entity.User;
-import com.barbershop.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.barbershop.dto.UserDTO;
+import com.barbershop.entity.User;
+import com.barbershop.repository.UserRepository;
+
 @Service
 public class UserService {
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    public List<UserDTO> getAllUsers() {
-        return userRepository.findAll().stream().map(UserDTO::new).collect(Collectors.toList());
-    }
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder; // For password hashing
 
-    public UserDTO getUserByUserName(String userName) {
-        User user = userRepository.findByUserName(userName);
-        return user != null ? new UserDTO(user) : null;
-    }
+	public List<UserDTO> getAllUsers() {
+		return userRepository.findAll().stream().map(UserDTO::new).collect(Collectors.toList());
+	}
 
-    public UserDTO createUser(UserDTO userDTO) {
-        User user = new User();
-        user.setUserName(userDTO.getUserName());
-        user.setPassword(userDTO.getPassword());
-        // Set other fields
-        return new UserDTO(userRepository.save(user));
-    }
+	public UserDTO getUserByUserName(String userName) {
+		User user = userRepository.findByUserName(userName);
+		return user != null ? new UserDTO(user) : null;
+	}
 
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
-    }
+	public UserDTO createUser(UserDTO userDTO) {
+		User user = new User();
+		user.setUserName(userDTO.getUserName());
+		user.setPassword(passwordEncoder.encode(userDTO.getPassword())); // Hash the password
+		// Set other fields if needed
+		return new UserDTO(userRepository.save(user));
+	}
 
-    public UserDTO login(UserDTO userDTO) {
-        User user = userRepository.findByUserName(userDTO.getUserName());
-        if (user != null && user.getPassword().equals(userDTO.getPassword())) {
-            return new UserDTO(user);
-        }
-        return null;
-    }
+	public void deleteUser(Long id) {
+		userRepository.deleteById(id);
+	}
+
+	public UserDTO login(UserDTO userDTO) {
+		User user = userRepository.findByUserName(userDTO.getUserName());
+		if (user != null && passwordEncoder.matches(userDTO.getPassword(), user.getPassword())) {
+			return new UserDTO(user);
+		}
+		return null;
+	}
 }

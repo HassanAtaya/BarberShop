@@ -16,12 +16,8 @@ public class UserDTO {
 		this.id = user.getId();
 		this.userName = user.getUserName();
 		this.password = user.getPassword();
-		if(user.getRole() != null) {
-			this.roleName = user.getRole().getName();
-		}
-		if(user.getLanguage() != null) {
-			this.languageName = user.getLanguage().getName();
-		}
+		this.roleName = (user.getRole() != null) ? user.getRole().getName() : null;
+        this.languageName = (user.getLanguage() != null) ? user.getLanguage().getName() : null;
 	}
 
 	public Long getId() {

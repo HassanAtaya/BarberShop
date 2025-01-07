@@ -40,7 +40,7 @@ export class AppointmentsComponent implements OnInit {
 
   loadUsers() {
     // Assuming there's a service method to load users
-    this.usersService.getAllUsers().subscribe(
+    this.usersService.getUsers().subscribe(
       data => {
         this.users = data;
       },
