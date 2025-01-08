@@ -1,1 +1,9 @@
-<router-outlet></router-outlet>
+<div *ngIf="allSRVService.user" class="menu-container">
+    <button *ngFor="let menu of menus" (click)="onMenuClick(menu.route)">
+        {{ menu.label }}
+    </button>
+</div>
+
+<div class="content">
+    <router-outlet></router-outlet>
+</div>

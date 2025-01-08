@@ -17,10 +17,9 @@ export class LoginComponent implements OnInit {
   @ViewChild('userNameInput') userNameInput!: ElementRef;
 
   constructor(
+    public allSRVService: allSRVService,
     private loginService: LoginService,
-    private router: Router,
     private toastrService: ToastrService,
-    private allSRVService: allSRVService
   ) {
 
   }
@@ -44,7 +43,7 @@ export class LoginComponent implements OnInit {
 
     this.loginService.login(this.userName, this.password).subscribe((response: any) => {
         if (response?.id > 0) {
-          this.router.navigateByUrl('/home');
+          // this.router.navigateByUrl('/home');
           this.toastrService.success("Logged In");
           this.allSRVService.user = response;
         } else {
