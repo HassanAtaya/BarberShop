@@ -12,7 +12,9 @@ export class RolesService {
   constructor(
     private http: HttpClient,
     private allSRVService: allSRVService
-  ) { }
+  ) { 
+    
+  }
 
   getAllRoles(): Observable<any> {
     return this.http.get<any>(this.allSRVService.url + this.url);

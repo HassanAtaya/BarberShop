@@ -13,9 +13,9 @@
         required
         #userNameInput
       >
-      <div *ngIf="userNameField.invalid && userNameField.touched" style="color: red;">
+      <!-- <div *ngIf="userNameField.invalid && userNameField.touched" style="color: red;">
         Username is required.
-      </div>
+      </div> -->
     </div>
     <div>
       <label for="password">Password:</label>
@@ -34,9 +34,9 @@
           <span *ngIf="passwordVisible">🙈</span>
         </button>
       </div>
-      <div *ngIf="passwordField.invalid && passwordField.touched" style="color: red;">
+      <!-- <div *ngIf="passwordField.invalid && passwordField.touched" style="color: red;">
         Password is required.
-      </div>
+      </div> -->
     </div>
     <button style="width: 102%;" type="submit">Login</button>
   </form>

@@ -35,10 +35,6 @@ public class User {
 	@Column(name = "last_update")
 	private LocalDateTime lastUpdate;
 
-	@Column(name = "last_updator")
-	private Long lastUpdator;
-
-	// Getters and Setters
 	public Long getId() {
 		return id;
 	}
@@ -87,11 +83,4 @@ public class User {
 		this.lastUpdate = lastUpdate;
 	}
 
-	public Long getLastUpdator() {
-		return lastUpdator;
-	}
-
-	public void setLastUpdator(Long lastUpdator) {
-		this.lastUpdator = lastUpdator;
-	}
 }

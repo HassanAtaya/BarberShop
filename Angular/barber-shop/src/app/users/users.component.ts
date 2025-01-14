@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from './users.service';
+import { RolesService } from '../roles/roles.service';
+import { allSRVService } from '../all-srvc.service';
 
 @Component({
   selector: 'app-users',
@@ -8,14 +10,24 @@ import { UsersService } from './users.service';
 })
 export class UsersComponent implements OnInit {
   users: any[] = [];
+  roles: any[] = [];
+  languages: any[] = [];
   user: any = {};
   editingUserId: number | null = null;
   showAddUserModal: boolean = false;
 
-  constructor(private userService: UsersService) { }
+  constructor(
+    private userService: UsersService,
+    private rolesService: RolesService,
+    private allSRVService: allSRVService
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.loadUsers();
+    this.getAllRoles();
+    this.getAllLanguages();
   }
 
   loadUsers(): void {
@@ -29,11 +41,33 @@ export class UsersComponent implements OnInit {
     );
   }
 
+  getAllRoles() {
+    this.rolesService.getAllRoles().subscribe((response: any) => {
+      if (response) {
+        this.roles = response;
+      }
+    }, (error: any) => {
+      console.error('Error getting roles', error);
+    }
+    );
+  }
+
+  getAllLanguages() {
+    this.allSRVService.getAllLanguages().subscribe((response: any) => {
+      if (response) {
+        this.languages = response;
+      }
+    }, (error: any) => {
+      console.error('Error getting roles', error);
+    }
+    );
+  }
+
   saveUser(): void {
     if (this.editingUserId) {
       this.userService.updateUser(this.user).subscribe(
         () => {
-          this.loadUsers();  // Refresh the list of users after updating
+          this.loadUsers();
           this.resetForm();
         },
         (error: any) => {
@@ -43,7 +77,7 @@ export class UsersComponent implements OnInit {
     } else {
       this.userService.createUser(this.user).subscribe(
         () => {
-          this.loadUsers();  // Refresh the list of users after adding
+          this.loadUsers();
           this.resetForm();
         },
         (error: any) => {

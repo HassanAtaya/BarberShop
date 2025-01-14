@@ -1,4 +1,4 @@
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -10,6 +10,14 @@ export class allSRVService {
 
     public user: any = null;
     public credentialsDTO: any = null;
+
+    public languageUrl: any = "languages";
+
+    constructor(
+        private http: HttpClient
+    ) {
+
+    }
 
     setStorage(key: any, value: any): void {
         if (typeof value === 'object') {
@@ -30,4 +38,9 @@ export class allSRVService {
         }
         return null;
     }
+
+    getAllLanguages() {
+        return this.http.get(this.url + this.languageUrl + "/getAllLanguages");
+    }
+
 }

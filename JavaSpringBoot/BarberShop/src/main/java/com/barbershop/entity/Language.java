@@ -9,7 +9,6 @@ public class Language {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private Long lastUpdator;
 	private LocalDateTime lastUpdate;
 
 	public Long getId() {
@@ -26,14 +25,6 @@ public class Language {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Long getLastUpdator() {
-		return lastUpdator;
-	}
-
-	public void setLastUpdator(Long lastUpdator) {
-		this.lastUpdator = lastUpdator;
 	}
 
 	public LocalDateTime getLastUpdate() {

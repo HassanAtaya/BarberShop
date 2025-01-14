@@ -38,7 +38,7 @@ import { PermissionsComponent } from './permissions/permissions.component';
     }),
     FormsModule,
     HttpClientModule,
-    TableModule
+    TableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -48,11 +48,19 @@
       </div>
       <div class="form-group flex-space-between">
         <label for="roleName">Role</label>
-        <input type="text" id="roleName" [(ngModel)]="user.roleName" name="roleName" class="form-control" />
+        <select style="width: 34%;" [(ngModel)]="user.roleName" id="roleName" name="roleName" class="form-control">
+          <option *ngFor="let role of roles" [value]="role.id">
+            {{ role.name }}
+          </option>
+        </select>        
       </div>
       <div class="form-group flex-space-between">
         <label for="languageName">Language</label>
-        <input type="text" id="languageName" [(ngModel)]="user.languageName" name="languageName" class="form-control" />
+        <select style="width: 34%;" [(ngModel)]="user.languageName" id="languageName" name="languageName" class="form-control">
+          <option *ngFor="let l of languages" [value]="l.id">
+            {{ l.name }}
+          </option>
+        </select>
       </div>
       <button type="submit" class="btn btn-primary">{{ editingUserId ? 'Save Changes' : 'Add User' }}</button>
       <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancel</button>

@@ -11,21 +11,12 @@ INSERT INTO permission (name) VALUES
 ('Add Role'), ('Edit Role'), ('Delete Role'),
 ('Add Permission'), ('Edit Permission'), ('Delete Permission');
 
--- Insert default user (superadmin123)
-INSERT INTO user (user_name, password, role_id, language_id, last_update) 
-VALUES ('superadmin', 'superadmin', 1, 1, NOW());
-
--- Get the ID of the newly inserted user
-SELECT @idd := LAST_INSERT_ID();
-
--- Update the `last_updator` column for the same record
-UPDATE user 
-SET last_updator = @idd 
-WHERE id = @idd;
-
-
 -- Assign role permissions
 INSERT INTO role_permission (role_id, permission_id)
 VALUES
 ((SELECT id FROM role WHERE name = 'SuperAdmin'), (SELECT id FROM permission WHERE name = 'ALL_PERMISSIONS')),
 ((SELECT id FROM role WHERE name = 'Admin'), (SELECT id FROM permission WHERE name = 'Add User'));
+
+-- Insert default user (superadmin123)
+INSERT INTO user (user_name, password, role_id, language_id, last_update) 
+VALUES ('superadmin', 'superadmin', (select id from role where name = 'SuperAdmin' limit 1), (select id from language where name = 'en' limit 1), NOW());

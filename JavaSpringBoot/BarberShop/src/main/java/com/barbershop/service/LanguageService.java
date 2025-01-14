@@ -1,19 +1,25 @@
 package com.barbershop.service;
 
-import com.barbershop.dto.LanguageDTO;
-import com.barbershop.entity.Language;
-import com.barbershop.repository.LanguageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.barbershop.dto.LanguageDTO;
+import com.barbershop.entity.Language;
+import com.barbershop.repository.LanguageRepository;
+
+@RestController
+@RequestMapping("/api/languages")
 public class LanguageService {
+	
     @Autowired
     private LanguageRepository languageRepository;
 
+    @GetMapping("/getAllLanguages")
     public List<LanguageDTO> getAllLanguages() {
         return languageRepository.findAll().stream().map(LanguageDTO::new).collect(Collectors.toList());
     }

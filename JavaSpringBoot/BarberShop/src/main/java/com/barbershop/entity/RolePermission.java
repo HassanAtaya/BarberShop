@@ -17,7 +17,6 @@ public class RolePermission {
 	@JoinColumn(name = "permission_id")
 	private Permission permission;
 
-	private Long lastUpdator;
 	private LocalDateTime lastUpdate;
 
 	public Long getId() {
@@ -42,14 +41,6 @@ public class RolePermission {
 
 	public void setPermission(Permission permission) {
 		this.permission = permission;
-	}
-
-	public Long getLastUpdator() {
-		return lastUpdator;
-	}
-
-	public void setLastUpdator(Long lastUpdator) {
-		this.lastUpdator = lastUpdator;
 	}
 
 	public LocalDateTime getLastUpdate() {
