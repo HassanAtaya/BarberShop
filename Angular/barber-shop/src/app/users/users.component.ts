@@ -8,7 +8,7 @@ import { UsersService } from './users.service';
 })
 export class UsersComponent implements OnInit {
   users: any[] = [];
-  user: any = {};  // Empty user object for adding/editing
+  user: any = {};
   editingUserId: number | null = null;
   showAddUserModal: boolean = false;
 
@@ -74,8 +74,14 @@ export class UsersComponent implements OnInit {
   }
 
   resetForm(): void {
-    this.user = {};  // Reset the user form
+    this.user = {};
     this.editingUserId = null;
     this.showAddUserModal = false;
+  }
+
+  addUser() {
+    this.user = {};
+    this.editingUserId = null;
+    this.showAddUserModal = true;
   }
 }

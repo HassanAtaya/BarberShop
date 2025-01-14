@@ -8,22 +8,35 @@ import { allSRVService } from '../all-srvc.service';
 })
 export class LoginService {
 
-    private url = "login";
-
     constructor(
         private http: HttpClient,
         private allSRVService: allSRVService
-    ) { }
+    ) {
 
-    login(userName: string, password: string): Observable<any> {
+    }
+
+    login(userName: any, password: any): Observable<any> {
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             'Accept': 'application/json',
             'Access-Control-Allow-Origin': '*'
         });
 
-        return this.http.post<any>(this.allSRVService.url + this.url, 
+        return this.http.post<any>(this.allSRVService.url + "login",
             { userName, password },
+            { headers }
+        );
+    }
+
+    logout(): Observable<any> {
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        });
+
+        return this.http.post<any>(this.allSRVService.url + "logout",
+            this.allSRVService.credentialsDTO,
             { headers }
         );
     }

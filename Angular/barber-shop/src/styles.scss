@@ -75,5 +75,21 @@ form select {
 }
 
 .toast-container .toast-progress {
-    background-color: #007bff !important; /* Light blue color */
-  }
+    background-color: #007bff !important;
+}
+
+.disable-show {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.selected-menu {
+    background-color: #007bff;
+    color: white;
+    border: 2px solid #0056b3;
+}
+
+.flex-space-between {
+    display: flex;
+    justify-content: space-between;
+}

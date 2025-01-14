@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(
     public allSRVService: allSRVService,
     private loginService: LoginService,
-    private toastrService: ToastrService,
+    private toastrService: ToastrService
   ) {
 
   }
@@ -42,15 +42,24 @@ export class LoginComponent implements OnInit {
     }
 
     this.loginService.login(this.userName, this.password).subscribe((response: any) => {
-        if (response?.id > 0) {
-          // this.router.navigateByUrl('/home');
-          this.toastrService.success("Logged In");
-          this.allSRVService.user = response;
-        } else {
-          this.toastrService.error("Invalid Username or Password");
-          this.allSRVService.user = null;
-        }
-      },
+      if (response?.id > 0 && response.token) {
+        this.toastrService.success("Logged In");
+        this.allSRVService.user = response;
+        this.allSRVService.credentialsDTO = {
+          userName: response.userName,
+          token: response.token
+        };
+
+        this.allSRVService.setStorage("user", this.allSRVService.user);
+        this.allSRVService.setStorage("credentialsDTO", this.allSRVService.credentialsDTO);
+      } else {
+        this.toastrService.error("Invalid Username or Password");
+        this.allSRVService.user = null;
+        this.allSRVService.credentialsDTO = null;
+        this.allSRVService.setStorage("user", null);
+        this.allSRVService.setStorage("credentialsDTO", null);
+      }
+    },
       error => {
         console.error('Login failed', error);
         this.allSRVService.user = null;

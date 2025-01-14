@@ -1,4 +1,7 @@
-ALTER DATABASE barbershop CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
+-- set sql_safe_updates = 0;
+-- DROP SCHEMA `barbershop` IF EXISTS;
+-- CREATE SCHEMA IF NOT EXISTS `barbershop` DEFAULT CHARACTER SET utf8mb4;
+-- ALTER DATABASE barbershop CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 -- Create tables without foreign key constraints first
 CREATE TABLE user (
@@ -36,18 +39,6 @@ CREATE TABLE role_permission (
     id INT AUTO_INCREMENT PRIMARY KEY,
     role_id INT,
     permission_id INT,
-    last_updator INT,
-    last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) CHARACTER SET utf8 COLLATE utf8_general_ci;
-
-CREATE TABLE rate (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    rate1Name VARCHAR(255) NOT NULL,
-    rate2Name VARCHAR(255) NOT NULL,
-    rate1Nbr INT NOT NULL,
-    rate2Nbr INT NOT NULL,
-    date DATE NOT NULL,
-    `use` TINYINT(1) NOT NULL DEFAULT 0,
     last_updator INT,
     last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) CHARACTER SET utf8 COLLATE utf8_general_ci;

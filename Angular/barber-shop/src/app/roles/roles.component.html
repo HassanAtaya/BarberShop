@@ -3,7 +3,7 @@
     <ul>
       <li *ngFor="let role of roles">
         {{ role.name }}
-        <button (click)="deleteRole(role.id)">Delete</button>
+        <button  [ngClass]="{ 'disable-show': role.name == 'SuperAdmin' }" (click)="deleteRole(role.id)">Delete</button>
       </li>
     </ul>
   

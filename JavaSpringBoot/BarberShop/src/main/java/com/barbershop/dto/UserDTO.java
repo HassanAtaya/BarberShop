@@ -8,7 +8,8 @@ public class UserDTO {
 	private String password;
 	private String roleName;
 	private String languageName;
-
+	private String token;
+	
 	public UserDTO() {
 	}
 
@@ -60,4 +61,12 @@ public class UserDTO {
 		this.languageName = languageName;
 	}
 
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+	
 }

@@ -16,6 +16,3 @@ ALTER TABLE role_permission
     ADD CONSTRAINT fk_role_permission_role FOREIGN KEY (role_id) REFERENCES role(id),
     ADD CONSTRAINT fk_role_permission_permission FOREIGN KEY (permission_id) REFERENCES permission(id),
     ADD CONSTRAINT fk_role_permission_user FOREIGN KEY (last_updator) REFERENCES user(id);
-
-ALTER TABLE rate
-    ADD CONSTRAINT fk_rate_user FOREIGN KEY (last_updator) REFERENCES user(id);

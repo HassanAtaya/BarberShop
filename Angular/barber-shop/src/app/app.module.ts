@@ -13,7 +13,7 @@ import { RolesComponent } from './roles/roles.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { CurrenciesComponent } from './currencies/currencies.component';
 import { ToastrModule } from 'ngx-toastr';
-import { HomeComponent } from './home/home.component';
+import { PermissionsComponent } from './permissions/permissions.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { HomeComponent } from './home/home.component';
     RolesComponent,
     AppointmentsComponent,
     CurrenciesComponent,
-    HomeComponent
+    PermissionsComponent
   ],
   imports: [
     BrowserModule,
