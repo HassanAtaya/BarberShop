@@ -1,0 +1,19 @@
+git:
+hassanataya95@gmail.com
+QX@4AFFvpSDiit3
+
+
+Create repository:
+/home/freelance/h-barbershopt/GIT_HERE
+
+
+
+DATABASE:
+localhost:3307
+root/root
+
+CREATE SCHEMA IF NOT EXISTS `barbershop` DEFAULT CHARACTER SET utf8mb4;
+ALTER DATABASE barbershop CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+To run the jar:
+java -jar barbershop-backend-1.0-SNAPSHOT.jar --server.port=8080
