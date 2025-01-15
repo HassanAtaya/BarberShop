@@ -1,6 +1,8 @@
 git:
+https://github.com/HassanAtaya/BarberShop
 hassanataya95@gmail.com
 QX@4AFFvpSDiit3
+>> JAR >> https://github.com/HassanAtaya/BarberShop/tree/main/Jars/jar_test
 
 
 Create repository:
@@ -17,3 +19,62 @@ ALTER DATABASE barbershop CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 To run the jar:
 java -jar barbershop-backend-1.0-SNAPSHOT.jar --server.port=8080
+localhost:8080 > should be showing login page: superadmin/superadmin
+
+
+---- Below commands to help install mysql,git,java ----
+### **1. Install MySQL 8.2**
+#### Step 1: Add the MySQL APT Repository
+
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.27-1_all.deb
+sudo dpkg -i mysql-apt-config_0.8.27-1_all.deb
+
+You will be prompted to configure the MySQL repository. Choose **MySQL Server & Cluster (Currently selected: mysql-8.2)** and press Enter.
+
+#### Step 2: Update and Install MySQL
+
+sudo apt update
+sudo apt install -y mysql-server
+
+
+#### Step 3: Secure MySQL Installation
+
+sudo mysql_secure_installation
+
+Follow the prompts to set the root password and configure security settings.
+
+#### Step 4: Verify Installation
+
+mysql --version
+
+
+---
+
+### **2. Install Git**
+#### Step 1: Update the Package List
+
+sudo apt update
+
+
+#### Step 2: Install Git
+
+sudo apt install -y git
+
+
+#### Step 3: Verify Installation
+
+git --version
+
+
+---
+
+### **3. Install Java JDK 17**
+#### Step 1: Update the Package List
+sudo apt update
+
+#### Step 2: Install OpenJDK 17
+sudo apt install -y openjdk-17-jdk
+
+
+#### Step 3: Verify Installation
+java -version
