@@ -28,7 +28,7 @@ src/environments/environment*.ts
 
 ## Compiled files ##
 *.class
-*.jar
+.jar
 *.war
 *.ear
 
