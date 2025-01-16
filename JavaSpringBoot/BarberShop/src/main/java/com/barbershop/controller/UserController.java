@@ -25,7 +25,13 @@ public class UserController {
 
 	@GetMapping
 	public List<UserDTO> getAllUsers() {
-		return userService.getAllUsers();
+		List<UserDTO> list = userService.getAllUsers();
+		
+		if (list != null && !list.isEmpty()) {
+			list.removeIf(userDTO -> "superadmin".equals(userDTO.getUserName()));
+		}
+		
+		return list;
 	}
 
 	@GetMapping("/{userName}")
@@ -34,7 +40,7 @@ public class UserController {
 		return userDTO != null ? ResponseEntity.ok(userDTO) : ResponseEntity.notFound().build();
 	}
 
-	@PostMapping
+	@PostMapping("/saveUser")
 	public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
 		UserDTO createdUser = userService.createUser(userDTO);
 		return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);

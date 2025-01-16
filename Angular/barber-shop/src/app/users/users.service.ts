@@ -22,8 +22,8 @@ export class UsersService {
   }
 
   // Create a user
-  createUser(user: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, user);
+  saveUser(user: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl + "/saveUser", user);
   }
 
   // Update user (same API as create for simplicity, or you can use a separate PUT request)

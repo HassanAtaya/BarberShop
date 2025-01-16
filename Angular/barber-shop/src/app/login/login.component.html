@@ -1,8 +1,8 @@
 <div *ngIf="!allSRVService.user" class="login-container">
-  <h2>Login</h2>
+  <h2>{{ 'LOGIN.TITLE' | translate }}</h2>
   <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" novalidate>
     <div>
-      <label for="userName">Username:</label>
+      <label for="userName">{{ 'LOGIN.USERNAME_LABEL' | translate }}</label>
       <input
         style="width: 97%;"
         type="text"
@@ -12,13 +12,14 @@
         #userNameField="ngModel"
         required
         #userNameInput
+        placeholder="{{ 'LOGIN.USERNAME_PLACEHOLDER' | translate }}"
       >
-      <!-- <div *ngIf="userNameField.invalid && userNameField.touched" style="color: red;">
-        Username is required.
-      </div> -->
+      <div *ngIf="userNameField.invalid && userNameField.touched" style="color: red;">
+        {{ 'LOGIN.USERNAME_REQUIRED' | translate }}
+      </div>
     </div>
     <div>
-      <label for="password">Password:</label>
+      <label for="password">{{ 'LOGIN.PASSWORD_LABEL' | translate }}</label>
       <div class="password-container">
         <input
           style="width: 90%;"
@@ -28,16 +29,17 @@
           name="password"
           #passwordField="ngModel"
           required
+          placeholder="{{ 'LOGIN.PASSWORD_PLACEHOLDER' | translate }}"
         >
         <button type="button" (click)="togglePasswordVisibility()" class="eye-icon">
           <span *ngIf="!passwordVisible">👁️</span>
           <span *ngIf="passwordVisible">🙈</span>
         </button>
       </div>
-      <!-- <div *ngIf="passwordField.invalid && passwordField.touched" style="color: red;">
-        Password is required.
-      </div> -->
+      <div *ngIf="passwordField.invalid && passwordField.touched" style="color: red;">
+        {{ 'LOGIN.PASSWORD_REQUIRED' | translate }}
+      </div>
     </div>
-    <button style="width: 102%;" type="submit">Login</button>
+    <button style="width: 102%;" type="submit">{{ 'LOGIN.LOGIN_BUTTON' | translate }}</button>
   </form>
 </div>

@@ -1,5 +1,8 @@
 package com.barbershop.dto;
 
+import java.util.List;
+
+import com.barbershop.entity.RolePermission;
 import com.barbershop.entity.User;
 
 public class UserDTO {
@@ -9,7 +12,8 @@ public class UserDTO {
 	private String roleName;
 	private String languageName;
 	private String token;
-	
+	private List<RolePermission> rolePermissions;
+
 	public UserDTO() {
 	}
 
@@ -18,7 +22,7 @@ public class UserDTO {
 		this.userName = user.getUserName();
 		this.password = user.getPassword();
 		this.roleName = (user.getRole() != null) ? user.getRole().getName() : null;
-        this.languageName = (user.getLanguage() != null) ? user.getLanguage().getName() : null;
+		this.languageName = (user.getLanguage() != null) ? user.getLanguage().getName() : null;
 	}
 
 	public Long getId() {
@@ -68,5 +72,13 @@ public class UserDTO {
 	public void setToken(String token) {
 		this.token = token;
 	}
-	
+
+	public List<RolePermission> getRolePermissions() {
+		return rolePermissions;
+	}
+
+	public void setRolePermissions(List<RolePermission> rolePermissions) {
+		this.rolePermissions = rolePermissions;
+	}
+
 }

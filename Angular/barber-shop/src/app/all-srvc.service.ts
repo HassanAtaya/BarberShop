@@ -12,6 +12,8 @@ export class allSRVService {
     public credentialsDTO: any = null;
 
     public languageUrl: any = "languages";
+    menus: any = [];
+    lang: any = "en";
 
     constructor(
         private http: HttpClient
@@ -42,5 +44,42 @@ export class allSRVService {
     getAllLanguages() {
         return this.http.get(this.url + this.languageUrl + "/getAllLanguages");
     }
+
+    checkIfPermission(name: string): boolean {
+        return this.user?.rolePermissions?.some(
+            (element: any) =>
+                element?.permission?.name === name ||
+                element?.permission?.name === "ALL_PERMISSIONS"
+        ) || false;
+    }
+
+    loadMenus() {
+        if (this.checkIfPermission('ALL_PERMISSIONS')) {
+          this.menus = [
+            { label: 'Users', route: '/users' },
+            { label: 'Roles', route: '/roles' },
+            { label: 'Permissions', route: '/permissions' }
+          ];
+        }
+        else {
+          if (this.checkIfPermission('Add User') ||
+            this.checkIfPermission('Edit User') ||
+            this.checkIfPermission('Delete User')) {
+            this.menus.push({ label: 'Users', route: '/users' });
+          }
+          if (this.checkIfPermission('Add Role') ||
+            this.checkIfPermission('Edit Role') ||
+            this.checkIfPermission('Delete Role')) {
+            this.menus.push({ label: 'Roles', route: '/roles' });
+          }
+          if (this.checkIfPermission('Add Permission') ||
+            this.checkIfPermission('Edit Permission') ||
+            this.checkIfPermission('Delete Permission')) {
+            this.menus.push({ label: 'Permissions', route: '/permissions' });
+          }
+        }
+    
+        this.setStorage("menus", this.menus);
+      }
 
 }

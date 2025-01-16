@@ -17,6 +17,7 @@ public class RolePermission {
 	@JoinColumn(name = "permission_id")
 	private Permission permission;
 
+	@Column(name = "last_update")
 	private LocalDateTime lastUpdate;
 
 	public Long getId() {

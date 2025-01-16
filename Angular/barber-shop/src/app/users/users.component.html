@@ -1,27 +1,29 @@
 <!-- Button to trigger the modal for adding a new user -->
 <div class="button-container">
-  <button class="btn btn-primary" (click)="addUser()">Add New User</button>
+  <button class="btn btn-primary" (click)="addUser()">{{ 'ADD_NEW_USER' | translate }}</button>
 </div>
 
 <!-- User table -->
 <p-table [value]="users" [responsive]="true" class="mt-3">
   <ng-template pTemplate="header">
     <tr>
-      <th>Action</th>
-      <th>Username</th>
-      <th>Password</th>
-      <th>Role</th>
-      <th>Language</th>
+      <th>{{ 'ACTION' | translate }}</th>
+      <th>{{ 'USERNAME' | translate }}</th>
+      <th>{{ 'PASSWORD' | translate }}</th>
+      <th>{{ 'ROLE' | translate }}</th>
+      <th>{{ 'LANGUAGE' | translate }}</th>
     </tr>
   </ng-template>
 
   <ng-template pTemplate="body" let-user>
     <tr>
       <td>
-        <button [ngClass]="{ 'disable-show': user.userName == 'superadmin' }" class="btn btn-warning" (click)="editUser(user)">
+        <button [ngClass]="{ 'disable-show': user.userName == 'superadmin' }" class="btn btn-warning"
+          (click)="editUser(user)">
           <i class="fa fa-edit"></i>
         </button>
-        <button [ngClass]="{ 'disable-show': user.userName == 'superadmin' }" class="btn btn-danger" (click)="deleteUser(user.id)">
+        <button [ngClass]="{ 'disable-show': user.userName == 'superadmin' }" class="btn btn-danger"
+          (click)="deleteUser(user.id)">
           <i class="fa fa-trash"></i>
         </button>
       </td>
@@ -36,34 +38,37 @@
 <!-- Modal for adding/editing user -->
 <div *ngIf="showAddUserModal" class="modal-overlay">
   <div class="modal-content">
-    <h3>{{ editingUserId ? 'Edit' : 'Add' }} User</h3>
+    <h3>{{ editingUserId ? ('EDIT_USER' | translate) : ('ADD_USER' | translate) }}</h3>
     <form (ngSubmit)="saveUser()">
       <div class="form-group flex-space-between">
-        <label for="userName">Username</label>
+        <label for="userName">{{ 'USERNAME' | translate }}</label>
         <input type="text" id="userName" [(ngModel)]="user.userName" name="userName" class="form-control" required />
       </div>
       <div class="form-group flex-space-between">
-        <label for="password">Password</label>
-        <input type="password" id="password" [(ngModel)]="user.password" name="password" class="form-control" required />
+        <label for="password">{{ 'PASSWORD' | translate }}</label>
+        <input type="password" id="password" [(ngModel)]="user.password" name="password" class="form-control"
+          required />
       </div>
       <div class="form-group flex-space-between">
-        <label for="roleName">Role</label>
+        <label for="roleName">{{ 'ROLE' | translate }}</label>
         <select style="width: 34%;" [(ngModel)]="user.roleName" id="roleName" name="roleName" class="form-control">
-          <option *ngFor="let role of roles" [value]="role.id">
+          <option *ngFor="let role of roles" [value]="role.name">
             {{ role.name }}
           </option>
-        </select>        
+        </select>
       </div>
       <div class="form-group flex-space-between">
-        <label for="languageName">Language</label>
-        <select style="width: 34%;" [(ngModel)]="user.languageName" id="languageName" name="languageName" class="form-control">
-          <option *ngFor="let l of languages" [value]="l.id">
+        <label for="languageName">{{ 'LANGUAGE' | translate }}</label>
+        <select style="width: 34%;" [(ngModel)]="user.languageName" id="languageName" name="languageName"
+          class="form-control">
+          <option *ngFor="let l of languages" [value]="l.name">
             {{ l.name }}
           </option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary">{{ editingUserId ? 'Save Changes' : 'Add User' }}</button>
-      <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancel</button>
+      <button type="submit" class="btn btn-primary">{{ editingUserId ? ('SAVE_CHANGES' | translate) : ('ADD_USER' |
+        translate) }}</button>
+      <button type="button" class="btn btn-secondary" (click)="resetForm()">{{ 'CANCEL' | translate }}</button>
     </form>
   </div>
 </div>

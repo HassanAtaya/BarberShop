@@ -27,9 +27,7 @@ public class Utilities {
 	}
 
 	public static PermissionDTO mapPermissionToPermissionDTO(Permission permission) {
-		PermissionDTO permissionDTO = new PermissionDTO();
-		permissionDTO.setId(permission.getId());
-		permissionDTO.setName(permission.getName());
+		PermissionDTO permissionDTO = new PermissionDTO(permission);
 		return permissionDTO;
 	}
 

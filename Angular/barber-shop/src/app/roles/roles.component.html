@@ -1,19 +1,21 @@
 <div class="roles-container">
-    <h2>Roles</h2>
-    <ul>
-      <li *ngFor="let role of roles">
-        {{ role.name }}
-        <button  [ngClass]="{ 'disable-show': role.name == 'SuperAdmin' }" (click)="deleteRole(role.id)">Delete</button>
-      </li>
-    </ul>
-  
-    <!-- Role creation form -->
-    <form (ngSubmit)="createRole(roleForm)">
-      <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" [(ngModel)]="roleForm.name" name="name" required>
+  <h2>{{ 'ROLES.TITLE' | translate }}</h2>
+  <div style="width: 10%;">
+    <ng-container *ngFor="let role of roles">
+      <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 3%;">
+        <span>{{ role.name }}</span>
+        <button class="trash-role" (click)="deleteRole(role.id)">
+          <i class="fa fa-trash"></i>
+        </button>
       </div>
-      <button type="submit" [disabled]="!roleForm.name">Create Role</button>
-    </form>
+    </ng-container>
   </div>
-  
+
+  <form (ngSubmit)="createRole(roleForm)">
+    <div style="margin-top: 1%;">
+      <label for="name">{{ 'ROLES.NAME' | translate }}:</label>
+      <input type="text" id="name" [(ngModel)]="roleForm.name" name="name" required>
+    </div>
+    <button type="submit">{{ 'ROLES.CREATE' | translate }}</button>
+  </form>
+</div>

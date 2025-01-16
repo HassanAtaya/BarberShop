@@ -1,15 +1,17 @@
 <ng-container *ngIf="allSRVService.user">
     <div>
         <button (click)="logout()">
-            Logout
+            {{ 'LOGOUT' | translate }}
         </button>
     </div>
-    <div  class="menu-container">
-        <button [class.selected-menu]="menu.route === selectedMenu" *ngFor="let menu of menus" (click)="onMenuClick(menu.route)">
-            {{ menu.label }}
+    <div class="menu-container">
+        <button [class.selected-menu]="menu.route === selectedMenu" *ngFor="let menu of allSRVService.menus"
+            (click)="onMenuClick(menu.route)">
+            {{ menu.label | translate }}
         </button>
     </div>
 </ng-container>
+
 <div class="content">
     <router-outlet></router-outlet>
 </div>

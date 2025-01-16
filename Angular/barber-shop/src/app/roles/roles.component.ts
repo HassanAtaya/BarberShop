@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RolesService } from './roles.service';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-roles',
@@ -8,11 +10,17 @@ import { RolesService } from './roles.service';
 })
 export class RolesComponent implements OnInit {
   roles: any[] = [];
-  roleForm: any = { // Initialize the form with an empty object
+  roleForm: any = {
     name: ''
   };
 
-  constructor(private rolesService: RolesService) { }
+  constructor(
+    private rolesService: RolesService,
+    private toast: ToastrService,
+    private translate: TranslateService
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.loadRoles();
@@ -24,36 +32,46 @@ export class RolesComponent implements OnInit {
         this.roles = data;
       },
       error => {
-        console.error('Error loading roles', error);
+        console.error(this.translate.instant('ERROR_LOADING_ROLES'), error);
       }
     );
   }
 
   createRole(role: any) {
-    this.rolesService.createRole(role).subscribe(
-      response => {
-        this.loadRoles(); // Reload the roles list after creating a new one
-        this.resetForm(); // Reset the form fields after submission
-      },
-      error => {
-        console.error('Error creating role', error);
-      }
-    );
+    if (!(String(role?.name).length > 0)) {
+      const warningMessage = this.translate.instant('ROLE_SHOULD_BE_FILLED');
+      this.toast.warning(warningMessage);
+    }
+    else {
+      this.rolesService.createRole(role).subscribe(
+        response => {
+          this.loadRoles();
+          this.resetForm();
+          const successMessage = this.translate.instant('ROLE_CREATED');
+          this.toast.success(successMessage);
+        },
+        error => {
+          this.toast.error(error?.error);
+          console.error(this.translate.instant('ERROR_CREATING_ROLE'), error);
+        }
+      );
+    }
   }
 
   deleteRole(id: number) {
     this.rolesService.deleteRole(id).subscribe(
       response => {
-        this.loadRoles(); // Reload the roles list after deleting
+        this.loadRoles();
       },
       error => {
-        console.error('Error deleting role', error);
+        console.error(this.translate.instant('ERROR_DELETING_ROLE'), error);
+        this.toast.error(error?.error);
       }
     );
   }
 
   resetForm() {
-    this.roleForm = { // Reset form fields
+    this.roleForm = {
       name: ''
     };
   }

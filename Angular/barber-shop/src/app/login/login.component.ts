@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LoginService } from './login.service';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { allSRVService } from '../all-srvc.service';
+import { LanguageService } from '../language.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -19,13 +20,15 @@ export class LoginComponent implements OnInit {
   constructor(
     public allSRVService: allSRVService,
     private loginService: LoginService,
-    private toastrService: ToastrService
-  ) {
+    private toastrService: ToastrService,
+    private languageService: LanguageService,
+    private translate: TranslateService
+  ) { 
 
   }
 
-  ngOnInit() {
-
+  ngOnInit() { 
+    
   }
 
   ngAfterViewInit() {
@@ -41,27 +44,35 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.loginService.login(this.userName, this.password).subscribe((response: any) => {
-      if (response?.id > 0 && response.token) {
-        this.toastrService.success("Logged In");
-        this.allSRVService.user = response;
-        this.allSRVService.credentialsDTO = {
-          userName: response.userName,
-          token: response.token
-        };
+    this.loginService.login(this.userName, this.password).subscribe(
+      (response: any) => {
+        if (response?.id > 0 && response.token) {
+          const loginSuccessMessage = this.translate.instant('LOGIN.LOGGED_IN');
+          this.toastrService.success(loginSuccessMessage);
+          this.allSRVService.user = response;
+          this.allSRVService.credentialsDTO = {
+            userName: response.userName,
+            token: response.token
+          };
 
-        this.allSRVService.setStorage("user", this.allSRVService.user);
-        this.allSRVService.setStorage("credentialsDTO", this.allSRVService.credentialsDTO);
-      } else {
-        this.toastrService.error("Invalid Username or Password");
-        this.allSRVService.user = null;
-        this.allSRVService.credentialsDTO = null;
-        this.allSRVService.setStorage("user", null);
-        this.allSRVService.setStorage("credentialsDTO", null);
-      }
-    },
+          this.allSRVService.setStorage('user', this.allSRVService.user);
+          this.allSRVService.setStorage('credentialsDTO', this.allSRVService.credentialsDTO);
+          this.allSRVService.setStorage('language', this.allSRVService.user?.languageName);
+          this.languageService.setLanguage(this.allSRVService?.user?.languageName);
+          this.allSRVService.loadMenus();
+        } else {
+          const invalidMessage = this.translate.instant('INVALID_USERNAME_PASSWORD');
+          this.toastrService.error(invalidMessage);
+          this.allSRVService.user = null;
+          this.allSRVService.credentialsDTO = null;
+          this.allSRVService.setStorage('user', null);
+          this.allSRVService.setStorage('credentialsDTO', null);
+          this.allSRVService.setStorage('language', null);
+          this.languageService.setLanguage(null);
+        }
+      },
       error => {
-        console.error('Login failed', error);
+        console.error(this.translate.instant('LOGIN_FAILED'), error);
         this.allSRVService.user = null;
       }
     );

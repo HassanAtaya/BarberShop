@@ -10,14 +10,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.barbershop.dto.UserDTO;
+import com.barbershop.entity.RolePermission;
 import com.barbershop.entity.User;
+import com.barbershop.exception.Exception;
+import com.barbershop.repository.RolePermissionRepository;
 import com.barbershop.repository.UserRepository;
 
 @Service
 public class UserService {
+	
     @Autowired
     private UserRepository userRepository;
-
+    
+    @Autowired
+    private RoleService roleService;
+    
+    @Autowired
+    private LanguageService languageService;
+    
+    @Autowired
+    private RolePermissionRepository rolePermissionRepository;
+    
     private final Map<String, String> userTokens = new HashMap<>();
 
     public List<UserDTO> getAllUsers() {
@@ -25,14 +38,28 @@ public class UserService {
     }
 
     public UserDTO getUserByUserName(String userName) {
-        User user = userRepository.findByUserName(userName);
+        User user = userRepository.findFirstByUserName(userName);
         return user != null ? new UserDTO(user) : null;
     }
 
     public UserDTO createUser(UserDTO userDTO) {
         User user = new User();
+        if(userDTO.getId() != 0) {
+        	user.setId(userDTO.getId());
+        }
         user.setUserName(userDTO.getUserName());
+        if(getUserByUserName(userDTO.getUserName()) != null) {
+        	throw new Exception("User with username " + userDTO.getUserName() + " already exists.");
+        }
         user.setPassword(userDTO.getPassword());
+        
+        if(userDTO.getRoleName() != null) {
+        	user.setRole(roleService.getRoleByName(userDTO.getRoleName()));
+        }
+        if(userDTO.getLanguageName() != null) {
+        	user.setLanguage(languageService.getLanguageName(userDTO.getLanguageName()));
+        }
+        
         return new UserDTO(userRepository.save(user));
     }
 
@@ -41,14 +68,19 @@ public class UserService {
     }
 
     public UserDTO login(UserDTO userDTO) {
-        User user = userRepository.findByUserName(userDTO.getUserName());
+        User user = userRepository.findFirstByUserName(userDTO.getUserName());
 
         if (user != null && user.getPassword().toString().equals(userDTO.getPassword())) {
             String token = generateToken();
             userTokens.put(user.getUserName(), token);
 
             UserDTO loggedInUser = new UserDTO(user);
+            
+            List<RolePermission> list = rolePermissionRepository.findPermissionsByRoleId(user.getRole().getId());
+            
             loggedInUser.setToken(token);
+            loggedInUser.setRolePermissions(list);
+            
             return loggedInUser;
         }
 

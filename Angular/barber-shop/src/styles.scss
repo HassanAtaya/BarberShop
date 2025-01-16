@@ -1,95 +1,319 @@
-@import 'node_modules/ngx-toastr/toastr.css';
-
-/* Global Styles */
-body {
-    font-family: Arial, sans-serif;
+/* General styling */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Container Styles */
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
 }
 
-/* Button Styles */
+h2,
+h3 {
+    text-align: center;
+    color: #333;
+}
+
+/* Containers */
+.login-container,
+.permissions-container,
+.roles-container,
+.button-container,
+.menu-container {
+    padding: 20px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Form Fields */
+input,
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
 button {
+    padding: 10px;
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px 20px;
-    cursor: pointer;
     border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-/* Form Styles */
-form {
-    display: flex;
-    flex-direction: column;
+.eye-icon {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
 }
 
-form div {
-    margin-bottom: 10px;
-}
-
-form label {
-    margin-bottom: 5px;
-}
-
-form input,
-form select {
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .container {
-        padding: 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 5px;
-    }
-
-    button {
-        padding: 8px 16px;
-    }
-
-    form input,
-    form select {
-        padding: 8px;
-    }
-}
-
-.toast-container .toast-progress {
-    background-color: #007bff !important;
+.btn {
+    padding: 8px 12px;
+    margin-right: 5px;
 }
 
 .disable-show {
-    opacity: 0.5;
-    pointer-events: none;
+    display: none;
 }
 
-.selected-menu {
-    background-color: #007bff;
-    color: white;
-    border: 2px solid #0056b3;
+/* Responsive Design */
+@media only screen and (max-width: 1200px) {
+
+    .login-container,
+    .permissions-container,
+    .roles-container {
+        padding: 15px;
+    }
+
+    h2,
+    h3 {
+        font-size: 24px;
+    }
+
+    form {
+        gap: 12px;
+    }
+
+    input,
+    select {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+
+    .login-container,
+    .permissions-container,
+    .roles-container {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    form {
+        gap: 10px;
+    }
+
+    input,
+    select {
+        font-size: 14px;
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .login-container {
+        width: 95%;
+    }
+
+    .permissions-container,
+    .roles-container {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .modal-content {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .form-group {
+        display: block;
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .login-container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .permissions-container,
+    .roles-container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 8px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .password-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .eye-icon {
+        margin-left: 10px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .modal-content {
+        width: 100%;
+    }
+}
+
+/* Table */
+p-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+td {
+    background-color: #fff;
+}
+
+.permission-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.permission-item p-checkbox {
+    margin-right: 10px;
+}
+
+/* Modals */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 40px;
+    border-radius: 5px;
+    max-width: 80%;
+    width: 500px;
+}
+
+.form-group {
+    margin-bottom: 15px;
 }
 
 .flex-space-between {
     display: flex;
     justify-content: space-between;
+}
+
+button[type="submit"],
+.btn {
+    width: 100%;
+}
+
+.menu-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.selected-menu {
+    background-color: #007bff;
+    color: white;
+}
+
+.toast-top-center {
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    position: fixed;
+    z-index: 1050;
+}
+
+.toast-success {
+    background-color: #28a745 !important;
+    /* Green background */
+    color: white !important;
+}
+
+.toast-error {
+    background-color: #dc3545 !important;
+    /* Red background */
+    color: white !important;
+}
+
+.toast-info {
+    background-color: #17a2b8 !important;
+    /* Blue background */
+    color: white !important;
+}
+
+.toast-warning {
+    background-color: #ffc107 !important;
+    /* Yellow background */
+    color: black !important;
+}
+
+/* Optional: Styling for the toast container */
+.ngx-toastr {
+    font-family: Arial, sans-serif;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.div-actions {
+    display: flex;
+}
+
+.btn-actions {
+    width: 10%;
+}
+
+.trash-role {
+    padding: 3px;
+    margin-left: 5%;
 }

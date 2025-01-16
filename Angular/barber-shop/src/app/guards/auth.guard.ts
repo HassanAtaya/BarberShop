@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { allSRVService } from '../all-srvc.service';
+import { LanguageService } from '../language.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,8 @@ export class AuthGuard implements CanActivate {
 
   constructor(
     private allSRVService: allSRVService,
-    private router: Router
+    private router: Router,
+    private languageService: LanguageService
   ) {
 
   }
@@ -21,6 +23,18 @@ export class AuthGuard implements CanActivate {
     if (user && token && route?.routeConfig?.path) {
       this.allSRVService.user = this.allSRVService.getStorage("user");
       this.allSRVService.credentialsDTO = this.allSRVService.getStorage("credentialsDTO");
+      let language: any = this.allSRVService.getStorage("language");
+      if(language){
+        this.languageService.setLanguage(language);
+      }
+      else if(this.allSRVService?.user?.languageName) {
+        this.languageService.setLanguage(language);
+      }
+      else {
+        this.languageService.setLanguage("en");
+      }
+
+      this.allSRVService.loadMenus();
     }
     else {
       this.router.navigate(['/login']);

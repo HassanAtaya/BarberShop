@@ -5,6 +5,8 @@ import com.barbershop.entity.Permission;
 public class PermissionDTO {
 	private Long id;
 	private String name;
+	private Long roleId;
+	private boolean assign;
 
 	public PermissionDTO() {
 	}
@@ -28,6 +30,22 @@ public class PermissionDTO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Long getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
+
+	public boolean isAssign() {
+		return assign;
+	}
+
+	public void setAssign(boolean assign) {
+		this.assign = assign;
 	}
 
 }

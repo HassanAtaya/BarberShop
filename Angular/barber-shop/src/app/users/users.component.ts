@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from './users.service';
 import { RolesService } from '../roles/roles.service';
 import { allSRVService } from '../all-srvc.service';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-users',
@@ -19,9 +22,12 @@ export class UsersComponent implements OnInit {
   constructor(
     private userService: UsersService,
     private rolesService: RolesService,
+    private toastrService: ToastrService,
+    private translate: TranslateService,
+    private languageService: LanguageService,
     private allSRVService: allSRVService
   ) {
-
+  
   }
 
   ngOnInit(): void {
@@ -36,7 +42,7 @@ export class UsersComponent implements OnInit {
         this.users = data;
       },
       (error: any) => {
-        console.error('Error loading users', error);
+        console.error(this.translate.instant('ERROR_LOADING_USERS'), error);
       }
     );
   }
@@ -47,9 +53,8 @@ export class UsersComponent implements OnInit {
         this.roles = response;
       }
     }, (error: any) => {
-      console.error('Error getting roles', error);
-    }
-    );
+      console.error(this.translate.instant('ERROR_GETTING_ROLES'), error);
+    });
   }
 
   getAllLanguages() {
@@ -58,50 +63,40 @@ export class UsersComponent implements OnInit {
         this.languages = response;
       }
     }, (error: any) => {
-      console.error('Error getting roles', error);
-    }
-    );
+      console.error(this.translate.instant('ERROR_GETTING_LANGUAGES'), error);
+    });
   }
 
   saveUser(): void {
-    if (this.editingUserId) {
-      this.userService.updateUser(this.user).subscribe(
-        () => {
-          this.loadUsers();
-          this.resetForm();
-        },
-        (error: any) => {
-          console.error('Error updating user', error);
-        }
-      );
-    } else {
-      this.userService.createUser(this.user).subscribe(
-        () => {
-          this.loadUsers();
-          this.resetForm();
-        },
-        (error: any) => {
-          console.error('Error creating user', error);
-        }
-      );
+    if (!this.editingUserId) {
+      this.user.id = 0;
     }
+
+    this.userService.saveUser(this.user).subscribe((response: any) => {
+      this.loadUsers();
+      this.resetForm();
+    },
+      (error: any) => {
+        this.toastrService.error(error?.error);
+      }
+    );
   }
 
   editUser(user: any): void {
-    this.user = { ...user };  // Copy the user data to edit
+    this.user = { ...user };
     this.editingUserId = user.id;
     this.showAddUserModal = true;
   }
 
   deleteUser(id: number): void {
-    const confirmDelete = confirm('Are you sure you want to delete this user?');
+    const confirmDelete = confirm(this.translate.instant('CONFIRM_DELETE_USER'));
     if (confirmDelete) {
       this.userService.deleteUser(id).subscribe(
         () => {
-          this.loadUsers();  // Refresh the list after deletion
+          this.loadUsers();
         },
         (error: any) => {
-          console.error('Error deleting user', error);
+          console.error(this.translate.instant('ERROR_DELETING_USER'), error);
         }
       );
     }

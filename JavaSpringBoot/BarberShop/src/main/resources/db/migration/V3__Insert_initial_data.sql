@@ -14,8 +14,7 @@ INSERT INTO permission (name) VALUES
 -- Assign role permissions
 INSERT INTO role_permission (role_id, permission_id)
 VALUES
-((SELECT id FROM role WHERE name = 'SuperAdmin'), (SELECT id FROM permission WHERE name = 'ALL_PERMISSIONS')),
-((SELECT id FROM role WHERE name = 'Admin'), (SELECT id FROM permission WHERE name = 'Add User'));
+((SELECT id FROM role WHERE name = 'SuperAdmin'), (SELECT id FROM permission WHERE name = 'ALL_PERMISSIONS'));
 
 -- Insert default user (superadmin123)
 INSERT INTO user (user_name, password, role_id, language_id, last_update) 

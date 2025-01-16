@@ -27,11 +27,22 @@ public class LanguageService {
     public LanguageDTO createLanguage(LanguageDTO languageDTO) {
         Language language = new Language();
         language.setName(languageDTO.getName());
-        // Set other fields
         return new LanguageDTO(languageRepository.save(language));
     }
 
     public void deleteLanguage(Long id) {
         languageRepository.deleteById(id);
     }
+    
+    @GetMapping("/getLanguageName")
+    public Language getLanguageName(String name) {
+    	Language language = languageRepository.findByName(name).orElse(null);
+        if(language != null) {
+        	return language;
+        }
+        else {
+        	return null;
+        }
+    }
+
 }
