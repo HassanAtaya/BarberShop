@@ -49,5 +49,9 @@
   "ERROR_LOADING_USERS": "Erreur lors du chargement des utilisateurs",
   "ERROR_GETTING_LANGUAGES": "Erreur lors de la récupération des langues",
   "ERROR_DELETING_USER": "Erreur lors de la suppression de l'utilisateur",
-  "LOGOUT": "Déconnexion"
+  "LOGOUT": "Déconnexion",
+  "PROFILE": "Profile",
+  "USERS": "Utilisateurs",
+  "ROLES_": "ROles",
+  "PERMISSIONS_": "Permissions"
 }

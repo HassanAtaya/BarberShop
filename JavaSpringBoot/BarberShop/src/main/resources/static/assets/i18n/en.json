@@ -49,5 +49,10 @@
   "ERROR_LOADING_USERS": "Error loading users",
   "ERROR_GETTING_LANGUAGES": "Error getting languages",
   "ERROR_DELETING_USER": "Error deleting user",
-  "LOGOUT": "Logout"
+  "LOGOUT": "Logout",
+  "PROFILE": "Profile",
+  "USERS": "Users",
+  "ROLES_": "Roles",
+  "PERMISSIONS_": "Permissions",
+  "PROFILE_USER": "Profile User: " 
 }

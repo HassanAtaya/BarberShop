@@ -49,5 +49,9 @@
   "ERROR_LOADING_USERS": "خطأ في تحميل المستخدمين",
   "ERROR_GETTING_LANGUAGES": "خطأ في استرداد اللغات",
   "ERROR_DELETING_USER": "خطأ في حذف المستخدم",
-  "LOGOUT": "تسجيل الخروج"
+  "LOGOUT": "تسجيل الخروج",
+  "PROFILE": "شخص",
+  "USERS": "المستخدمون",
+  "ROLES_": "الأدوار",
+  "PERMISSIONS_": "الأذونات"
 }
