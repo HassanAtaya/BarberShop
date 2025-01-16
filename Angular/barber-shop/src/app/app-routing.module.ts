@@ -8,7 +8,7 @@ import { PermissionsComponent } from './permissions/permissions.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
   { path: 'roles', component: RolesComponent, canActivate: [AuthGuard] },
   { path: 'permissions', component: PermissionsComponent, canActivate: [AuthGuard] }

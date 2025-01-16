@@ -1,10 +1,10 @@
 <div class="permissions-container">
   <div class="add-box">
-    <button pButton [label]="'PERMISSIONS.ASSIGN' | translate" class="p-button-success mt-3 assign-permission"
+    <button *ngIf="allSRVService.checkIfPermission('Edit Permission')" pButton [label]="'PERMISSIONS.ASSIGN' | translate" class="p-button-success mt-3 assign-permission"
       (click)="onAssign()"></button>
-    <button pButton [label]="'PERMISSIONS.ADD' | translate" class="p-button-success mt-3 add-permission"
+    <button *ngIf="allSRVService.checkIfPermission('Add Permission')" pButton [label]="'PERMISSIONS.ADD' | translate" class="p-button-success mt-3 add-permission"
       (click)="onAdd()"></button>
-    <input class="input-add" id="permissionName" type="text" pInputText [(ngModel)]="newPermissionName"
+    <input *ngIf="allSRVService.checkIfPermission('Add Permission')" class="input-add" id="permissionName" type="text" pInputText [(ngModel)]="newPermissionName"
       [placeholder]="'PERMISSIONS.ENTER_NAME' | translate" />
   </div>
 
@@ -19,10 +19,10 @@
       <tr>
         <td>
           <div class="div-actions">
-            <button class="btn btn-warning btn-actions" (click)="onEdit(permission)">
+            <button *ngIf="allSRVService.checkIfPermission('Edit Permission')" class="btn btn-warning btn-actions" (click)="onEdit(permission)">
               <i class="fa fa-edit"></i>
             </button>
-            <button class="btn btn-danger btn-actions" (click)="onDelete(permission.id)">
+            <button *ngIf="allSRVService.checkIfPermission('Delete Permission')" class="btn btn-danger btn-actions" (click)="onDelete(permission.id)">
               <i class="fa fa-trash"></i>
             </button>
           </div>

@@ -4,7 +4,6 @@ import { RolesService } from '../roles/roles.service';
 import { allSRVService } from '../all-srvc.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-users',
@@ -24,8 +23,7 @@ export class UsersComponent implements OnInit {
     private rolesService: RolesService,
     private toastrService: ToastrService,
     private translate: TranslateService,
-    private languageService: LanguageService,
-    private allSRVService: allSRVService
+    public allSRVService: allSRVService
   ) {
   
   }

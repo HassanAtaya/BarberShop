@@ -16,6 +16,9 @@ export class AppComponent implements OnInit {
   selectedMenu: string | null = null;
   direction: string = 'ltr';
   userLanguage: any = "en";
+  showProfile: boolean = false;
+  languages: any = [];
+  langSelected: any;
 
   constructor(
     public allSRVService: allSRVService,
@@ -40,11 +43,55 @@ export class AppComponent implements OnInit {
     } else {
       this.direction = 'ltr';
     }
+
+    this.getAllLanguages();
   }
 
   onMenuClick(route: string) {
     this.selectedMenu = route;
     this.router.navigateByUrl(route);
+  }
+
+  profile() {
+    setTimeout(() => {
+      this.langSelected = this.allSRVService.getStorage('language');
+    }, 1000);
+    
+    this.showProfile = true;
+  }
+
+  getAllLanguages() {
+    this.allSRVService.getAllLanguages().subscribe((response: any) => {
+      if (response) {
+        this.languages = response;
+        this.langSelected = this.languages.find(
+          (language: any) => language.name === this.allSRVService.user.languageName
+        );
+      }
+    }, (error: any) => {
+      console.error(this.translate.instant('ERROR_GETTING_LANGUAGES'), error);
+    });
+  }
+
+  closeModal() {
+    this.showProfile = false;
+  }  
+
+  onLanguageChange(event: any) {
+    if (this.allSRVService?.user?.id > 0 && this.langSelected?.id > 0) {
+      this.allSRVService.updateLanguageByUserID(this.allSRVService.user.id, this.langSelected.id).subscribe((response: any) => {
+        if(String(response?.text).includes("Successfully")) {
+          this.toastr.success(response.text);
+          this.allSRVService.user.languageName = this.langSelected.name;
+          this.allSRVService.setStorage('user', this.allSRVService.user);
+          this.allSRVService.setStorage('language', this.langSelected.name);
+          window.location.reload();
+        }
+        else {
+          this.toastr.error(response.text);
+        }
+      });
+    }
   }
 
   logout() {

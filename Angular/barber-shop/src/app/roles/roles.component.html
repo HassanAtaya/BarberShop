@@ -4,7 +4,7 @@
     <ng-container *ngFor="let role of roles">
       <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 3%;">
         <span>{{ role.name }}</span>
-        <button class="trash-role" (click)="deleteRole(role.id)">
+        <button *ngIf="allSRVService.checkIfPermission('Delete Role')" class="trash-role" (click)="deleteRole(role.id)">
           <i class="fa fa-trash"></i>
         </button>
       </div>

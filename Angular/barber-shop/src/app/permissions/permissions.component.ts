@@ -3,6 +3,7 @@ import { PermissionsService } from './permissions.service';
 import { ToastrService } from 'ngx-toastr';
 import { RolesService } from '../roles/roles.service';
 import { TranslateService } from '@ngx-translate/core';
+import { allSRVService } from '../all-srvc.service';
 
 @Component({
   selector: 'app-permissions',
@@ -23,7 +24,8 @@ export class PermissionsComponent implements OnInit {
     private permissionsService: PermissionsService,
     private toast: ToastrService,
     private rolesService: RolesService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    public allSRVService: allSRVService
   ) {
 
   }

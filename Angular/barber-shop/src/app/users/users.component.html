@@ -1,6 +1,6 @@
 <!-- Button to trigger the modal for adding a new user -->
 <div class="button-container">
-  <button class="btn btn-primary" (click)="addUser()">{{ 'ADD_NEW_USER' | translate }}</button>
+  <button *ngIf="allSRVService.checkIfPermission('Add User')" class="btn btn-primary" (click)="addUser()">{{ 'ADD_NEW_USER' | translate }}</button>
 </div>
 
 <!-- User table -->
@@ -18,11 +18,11 @@
   <ng-template pTemplate="body" let-user>
     <tr>
       <td>
-        <button [ngClass]="{ 'disable-show': user.userName == 'superadmin' }" class="btn btn-warning"
+        <button *ngIf="allSRVService.checkIfPermission('Edit User')" [ngClass]="{ 'disable-show': user.userName == 'superadmin' }" class="btn btn-warning"
           (click)="editUser(user)">
           <i class="fa fa-edit"></i>
         </button>
-        <button [ngClass]="{ 'disable-show': user.userName == 'superadmin' }" class="btn btn-danger"
+        <button *ngIf="allSRVService.checkIfPermission('Delete User')" [ngClass]="{ 'disable-show': user.userName == 'superadmin' }" class="btn btn-danger"
           (click)="deleteUser(user.id)">
           <i class="fa fa-trash"></i>
         </button>

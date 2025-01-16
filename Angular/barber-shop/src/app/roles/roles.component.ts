@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RolesService } from './roles.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { allSRVService } from '../all-srvc.service';
 
 @Component({
   selector: 'app-roles',
@@ -17,7 +18,8 @@ export class RolesComponent implements OnInit {
   constructor(
     private rolesService: RolesService,
     private toast: ToastrService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    public allSRVService: allSRVService
   ) {
 
   }

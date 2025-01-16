@@ -3,6 +3,9 @@
         <button (click)="logout()">
             {{ 'LOGOUT' | translate }}
         </button>
+        <button *ngIf="allSRVService?.user?.id > 0" (click)="profile()">
+            {{ 'PROFILE' | translate }}
+        </button>
     </div>
     <div class="menu-container">
         <button [class.selected-menu]="menu.route === selectedMenu" *ngFor="let menu of allSRVService.menus"
@@ -11,7 +14,21 @@
         </button>
     </div>
 </ng-container>
-
 <div class="content">
     <router-outlet></router-outlet>
+</div>
+
+<div *ngIf="showProfile" class="modal-overlay">
+    <div class="modal-content">
+        <h3>{{ 'PROFILE_USER' | translate }} {{ allSRVService.user.userName }}</h3>
+        <div>
+            <select [(ngModel)]="langSelected" id="languageName" name="languageName" class="form-control"
+                (change)="onLanguageChange($event)">
+                <option *ngFor="let l of languages" [ngValue]="l">
+                    {{ l.name }}
+                </option>
+            </select>
+        </div>
+        <button class="close-button" (click)="closeModal()">Close</button>
+    </div>
 </div>
